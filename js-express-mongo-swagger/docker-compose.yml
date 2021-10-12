@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+  mongoservice:
+    image : mongo:latest
+    container_name: mongoservice  
+    volumes:
+      - ./mongo/database:/data/db
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    networks:
+      - db_network
+
+networks:
+  
+  db_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+       - subnet: 10.10.18.0/24
